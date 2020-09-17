@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+  <xacro:arg name="kinematics_config" default="$(find ur_description)/config/ur5_default.yaml" />
+
+  <xacro:ur5_robot prefix="ur5_" joint_limited="false" kinematics_file="${load_yaml('$(arg kinematics_config)')}" />
+  <joint type="fixed" name="arm_mount">
+    <parent link="top_plate_front_link" />
+    <child link="ur5_base_link" />
+    <origin xyz="-0.1 0 0" rpy="0 0 ${M_PI}" />
+  </joint>
+
+</robot>
