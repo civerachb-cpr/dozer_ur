@@ -3,10 +3,28 @@
   <rosparam command="load" file="$(find dozer)/config/controllers.yaml" />
 
   <include file="$(find husky_base)/launch/base.launch" />
+
+  <node name="ur_interface" pkg="ur_robot_driver" type="ur_robot_driver_node" output="screen" launch-prefix="" required="true">
+    <param name="robot_ip" type="str" value="$(optenv HUSKY_UR_HOST 192.168.131.90)"/>
+    <param name="reverse_port" type="int" value="50001"/>
+    <param name="script_sender_port" type="int" value="50002"/>
+    <rosparam command="load" file="$(find dozer)/config/ur5_config.yaml" />
+    <param name="script_file" value="$(find ur_robot_driver)/resources/ros_control.urscript"/>
+    <param name="output_recipe_file" value="$(find ur_robot_driver)/resources/rtde_output_recipe.txt"/>
+    <param name="input_recipe_file" value="$(find ur_robot_driver)/resources/rtde_input_recipe.txt"/>
+    <param name="headless_mode" value="false"/>
+    <param name="tf_prefix" value="ur5_"/>
+    <param name="use_tool_communication" value="false"/>
+    <param name="tool_voltage" value="0"/>
+    <param name="tool_parity" value="0"/>
+    <param name="tool_baud_rate" value="115200"/>
+    <param name="tool_stop_bits" value="1"/>
+    <param name="tool_rx_idle_chars" value="1.5"/>
+    <param name="tool_tx_idle_chars" value="3.5"/>
+  </node>
+
   <node name="cpr_control_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args="pos_joint_traj_controller scaled_pos_joint_traj_controller speed_scaling_state_controller joint_state_controller force_torque_sensor_controller" />
-
-  <!-- load other controller -->
   <node name="ros_control_stopped_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args="--stopped joint_group_vel_controller" />
 </launch>
