@@ -2,9 +2,9 @@
 <launch>
   <include file="$(find husky_base)/launch/base.launch" />
   <node name="cpr_control_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" args="pos_joint_traj_controller scaled_pos_joint_traj_controller joint_group_vel_controller speed_scaling_state_controller joint_state_controller force_torque_sensor_controller" />
+    output="screen" args="pos_joint_traj_controller scaled_pos_joint_traj_controller speed_scaling_state_controller joint_state_controller force_torque_sensor_controller" />
 
   <!-- load other controller -->
   <node name="ros_control_stopped_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" args="--stopped $(arg stopped_controllers)" />
+    output="screen" args="--stopped joint_group_vel_controller" />
 </launch>
