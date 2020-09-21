@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+  <rosparam command="load" file="$(find dozer)/config/controllers.yaml" />
+
   <include file="$(find husky_base)/launch/base.launch" />
   <node name="cpr_control_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args="pos_joint_traj_controller scaled_pos_joint_traj_controller speed_scaling_state_controller joint_state_controller force_torque_sensor_controller" />
