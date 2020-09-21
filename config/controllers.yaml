@@ -1,3 +1,7 @@
+# Settings for ros_control control loop
+hardware_control_loop:
+   loop_hz: &loop_hz 125
+
 # Publish all joint states ----------------------------------
 joint_state_controller:
    type:         joint_state_controller/JointStateController
