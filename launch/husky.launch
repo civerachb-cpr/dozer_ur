@@ -4,7 +4,7 @@
 
   <include file="$(find husky_base)/launch/base.launch" />
 
-  <node name="ur_interface" pkg="ur_robot_driver" type="ur_robot_driver_node" output="screen" launch-prefix="" required="true">
+  <node name="ur_hardware_interface" pkg="ur_robot_driver" type="ur_robot_driver_node" output="screen" launch-prefix="" required="true">
     <param name="robot_ip" type="str" value="$(optenv HUSKY_UR_HOST 192.168.131.90)"/>
     <param name="reverse_port" type="int" value="50001"/>
     <param name="script_sender_port" type="int" value="50002"/>
